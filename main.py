@@ -6,8 +6,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 from binding_parameters import molecules
-
-max_length = 25
+from settings import max_length
 
 graph = {}
 name_graph = {}
@@ -27,8 +26,9 @@ def check_binding(element):
         if generate_element < bindings[len(graph[element])]:
             size_graph = len(graph)
             graph[size_graph] = [element]
-            graph[element].append(len(graph)-1)
-            name_element = random.choices(list(molecules.keys()), weights=[molecules[i][0] for i in molecules.keys()], k=1)[0]
+            graph[element].append(len(graph) - 1)
+            name_element = \
+            random.choices(list(molecules.keys()), weights=[molecules[i][0] for i in molecules.keys()], k=1)[0]
             name_graph[size_graph] = name_element
         else:
             graph[element].append('NA')
@@ -76,7 +76,7 @@ def main():
         G.add_edges_from((i, c) for c in connections)
 
     # Draw the graph
-    pos = nx.spring_layout(G)  # You can try different layout algorithms
+    pos = nx.spring_layout(G)
     nx.draw(G, pos, with_labels=True, font_weight='bold', node_color='teal', edge_color='gray', node_size=500)
 
     # Show the plot
